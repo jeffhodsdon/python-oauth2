@@ -381,7 +381,8 @@ class Request(dict):
         query = urlparse.urlparse(self.url)[4]
         
         url_items = self._split_url_string(query).items()
-        non_oauth_url_items = list([(k, v) for k, v in url_items  if not k.startswith('oauth_')])
+        non_oauth_url_items = list([(k, v) for k, v in url_items \
+            if not k.startswith('oauth_') and k not in self])
         items.extend(non_oauth_url_items)
 
         encoded_str = urllib.urlencode(sorted(items))
